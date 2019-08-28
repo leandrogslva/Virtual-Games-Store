@@ -61,70 +61,74 @@
 
         <v-content v-else>
             <v-container style="width: 600px; margin-top: 5px">
-                <v-card class="elevation-3">
-                    <v-card-title class="red darken-3 title ">New Account</v-card-title>
-                    <v-card-text class="white">
-                        <v-text-field
-                        light
-                        v-model="newAccount.user"
-                        :rules="[() => !!newAccount.user || 'Required']"
-                        label="User *"
-                        placeholder="Enter a user">
-                        </v-text-field>
+                <v-form v-model="formularioPreenchido"
+                ref='formAccount'>
+                    <v-card class="elevation-3">
+                        <v-card-title class="red darken-3 title ">New Account</v-card-title>
+                        <v-card-text class="white">
+                            <v-text-field
+                            light
+                            v-model="newAccount.user"
+                            :rules="[() => !!newAccount.user || 'Required']"
+                            label="User *"
+                            placeholder="Enter a user">
+                            </v-text-field>
 
-                        <v-text-field
-                        light
-                        v-model="newAccount.email"
-                        label="E-mail *"
-                        :rules="[rules.email]"
-                        placeholder="Enter a e-mail">
-                        </v-text-field>
+                            <v-text-field
+                            light
+                            v-model="newAccount.email"
+                            label="E-mail *"
+                            :rules="[rules.email]"
+                            placeholder="Enter a e-mail">
+                            </v-text-field>
 
-                        <v-text-field
-                        light
-                        v-model="newAccount.birth"
-                        type="date"
-                        label="Birth Date *"
-                        placeholder="Enter your birth date">
-                        </v-text-field>
+                            <v-text-field
+                            light
+                            v-model="newAccount.birth"
+                            type="date"
+                            label="Birth Date *"
+                            placeholder="Enter your birth date">
+                            </v-text-field>
 
-                        <v-text-field
-                        light
-                        v-model="newAccount.password"
-                        :rules="[rules.min]"
-                        label="Password *"
-                        placeholder="Enter a password"
-                        :append-icon="showPassWordRegister? 'visibility' : 'visibility_off'"
-                        @click:append="showPassWordRegister = !showPassWordRegister"
-                        :type="showPassWordRegister ? 'text' : 'password'">
-                        </v-text-field>
+                            <v-text-field
+                            light
+                            v-model="newAccount.password"
+                            :rules="[rules.min]"
+                            label="Password *"
+                            placeholder="Enter a password"
+                            :append-icon="showPassWordRegister? 'visibility' : 'visibility_off'"
+                            @click:append="showPassWordRegister = !showPassWordRegister"
+                            :type="showPassWordRegister ? 'text' : 'password'">
+                            </v-text-field>
 
-                        <v-text-field 
-                        light
-                        v-model="confirmPassword"
-                        label="Confirm Password *"
-                        placeholder="Confirm the password"
-                        :type="showPassWordRegister ? 'text' : 'password'">
-                        </v-text-field>
+                            <v-text-field 
+                            light
+                            v-model="confirmPassword"
+                            label="Confirm Password *"
+                            :rules="[confirmPassword == newAccount.password || 'The passwords must be the same']"
+                            placeholder="Confirm the password"
+                            :type="showPassWordRegister ? 'text' : 'password'">
+                            </v-text-field>
 
-                        <v-layout>
-                            <v-flex>
-                                <v-btn 
-                                class="red darken-3"
-                                :loading="backLoading"
-                                @click="backToLogin()">Cancel</v-btn>
-                            </v-flex>
+                            <v-layout>
+                                <v-flex>
+                                    <v-btn 
+                                    class="red darken-3"
+                                    :loading="backLoading"
+                                    @click="backToLogin()">Cancel</v-btn>
+                                </v-flex>
 
-                            <v-flex xs3>
-                                <v-btn 
-                                class="red darken-3"
-                                :loading="saveLoading"
-                                @click="saveAccount()">Finish</v-btn>
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-card>
-
+                                <v-flex xs3>
+                                    <v-btn 
+                                    class="red darken-3; ml-4"
+                                    :loading="saveLoading"
+                                    :disabled="!formularioPreenchido"
+                                    @click="saveAccount()">Finish</v-btn>
+                                </v-flex>
+                            </v-layout>
+                        </v-card-text>
+                    </v-card>
+                </v-form>
                 <v-snackbar
                 v-model="snackbarPassValid"
                 :timeout="2000"
@@ -156,6 +160,7 @@ export default {
 
     data(){
         return{
+            formularioPreenchido: false,
             animation: 'fade',
             passwordOK: false,
             fieldsOk: false,
@@ -274,6 +279,7 @@ export default {
                     this.saveLoading = false
                     this.register = false
                     this.newAccount = Object.assign({}, this.defaultData)
+                    this.$refs.formAccount.reset()
                     this.confirmPassword = ''
                     this.getCreatedAccounts()
                 }, 1500)
