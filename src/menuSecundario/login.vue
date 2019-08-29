@@ -23,9 +23,9 @@
                         style="width: 300px"
                         label="Password"
                         placeholder="Enter your password"
-                        :append-icon="showPassWordLogin? 'visibility' : 'visibility_off'"
-                        @click:append="showPassWordLogin = !showPassWordLogin"
-                        :type="showPassWordLogin ? 'text' : 'password'">
+                        :append-icon="showPassWord? 'visibility' : 'visibility_off'"
+                        @click:append="showPassWord = !showPassWord"
+                        :type="showPassWord ? 'text' : 'password'">
                         </v-text-field>
                         
                         <v-layout>
@@ -33,14 +33,14 @@
                                 <v-btn
                                 flat
                                 color="red"
-                                :loading="registerLoading"                     
+                                :loading="loadingBtns.register"                     
                                 @click="createAnAccount()">Create account</v-btn>
                             </v-flex>
 
                             <v-flex xs3>
                                 <v-btn 
                                 class="red darken-3"
-                                :loading="nextLoading"
+                                :loading="loadingBtns.next"
                                 @click="next()">Next
                                 </v-btn>
                             </v-flex>
@@ -96,9 +96,9 @@
                             :rules="[rules.min]"
                             label="Password *"
                             placeholder="Enter a password"
-                            :append-icon="showPassWordRegister? 'visibility' : 'visibility_off'"
-                            @click:append="showPassWordRegister = !showPassWordRegister"
-                            :type="showPassWordRegister ? 'text' : 'password'">
+                            :append-icon="showPassWord? 'visibility' : 'visibility_off'"
+                            @click:append="showPassWord = !showPassWord"
+                            :type="showPassWord ? 'text' : 'password'">
                             </v-text-field>
 
                             <v-text-field 
@@ -107,21 +107,21 @@
                             label="Confirm Password *"
                             :rules="[confirmPassword == newAccount.password || 'The passwords must be the same']"
                             placeholder="Confirm the password"
-                            :type="showPassWordRegister ? 'text' : 'password'">
+                            :type="showPassWord ? 'text' : 'password'">
                             </v-text-field>
 
                             <v-layout>
                                 <v-flex>
                                     <v-btn 
                                     class="red darken-3"
-                                    :loading="backLoading"
-                                    @click="backToLogin()">Cancel</v-btn>
+                                    :loading="loadingBtns.back"
+                                    @click="backToLogin()">Back</v-btn>
                                 </v-flex>
 
                                 <v-flex xs3>
                                     <v-btn 
                                     class="red darken-3; ml-4"
-                                    :loading="saveLoading"
+                                    :loading="loadingBtns.save"
                                     :disabled="!formularioPreenchido"
                                     @click="saveAccount()">Finish</v-btn>
                                 </v-flex>
@@ -129,20 +129,6 @@
                         </v-card-text>
                     </v-card>
                 </v-form>
-                <v-snackbar
-                v-model="snackbarPassValid"
-                :timeout="2000"
-                color="error" 
-                top>The passwords must be the same
-                </v-snackbar>
-
-                <v-snackbar 
-                v-model="snackbarFields"
-                :timeout="3000"
-                color="error"
-                top> The fields bellow must be completed
-                    <v-icon>error</v-icon>
-                </v-snackbar>
             </v-container>
         </v-content>
     </div>
@@ -158,36 +144,29 @@ export default {
         this.getCreatedAccounts()
     },
 
+    computed: {
+       allUsers(){
+           return this.$store.getters.allUsers
+       }
+    },
+
     data(){
         return{
-            formularioPreenchido: false,
-            animation: 'fade',
-            passwordOK: false,
-            fieldsOk: false,
-
-            snackbarFields: false,
-            snackbarPassValid: false,
+            formularioPreenchido: false,    
             snackbarLogin: false,
-
-            registerLoading: false,
-            saveLoading: false,
-            backLoading: false,
-            nextLoading: false,
-            
-            showPassWordLogin: false,
-            showPassWordRegister: false,
+            showPassWord: false,
             register: false,
             confirmPassword: '',
-
+            loadingBtns:{
+                register: false,
+                save: false,
+                back: false,
+                next: false,
+            },
             defaultData:{
                 user: '',
                 email: '',
                 birth: '',
-                password: '',
-                confirmPassword: '',
-            },
-            login: {
-                user: '',
                 password: '',
             },
             newAccount:{
@@ -196,6 +175,14 @@ export default {
                 birth: '',
                 password: '',
                 cart: [],
+            },
+            defaultLogin: {
+                user: '',
+                password: '',
+            },
+            login: {
+                user: '',
+                password: '',
             },
             rules:{
                 required: value => !value || 'Required',
@@ -209,34 +196,33 @@ export default {
     },
 
     methods:{
-
         next(){
-            for(let i = 0; i < this.$store.state.usersAccounts.length; i++){
-                if(this.login.user == this.$store.state.usersAccounts[i].user && 
-                this.login.password == this.$store.state.usersAccounts[i].password){
-                    this.nextLoading = true
-                    this.$store.state.logged = true
+            this.loadingBtns.next = true
+            for(let i = 0; i < this.allUsers.length; i++){
+                if(this.login.user == this.allUsers[i].user && 
+                this.login.password == this.allUsers[i].password){
+                    this.$store.commit('setStatusLogged', true)
                     setTimeout(() => {
                         this.$router.push({path:'/'})
-                        this.$store.state.userLogged.user = this.$store.state.usersAccounts[i].user 
-                        this.$store.state.userLogged.id = this.$store.state.usersAccounts[i].id
-                        this.nextLoading = false
-                        this.login =  Object.assign({}, this.defaultData)
-                    }, 1000)          
+                        this.$store.dispatch('addUserLogged', this.login)
+                        this.loadingBtns.next = false
+                    }, 1000) 
+                }else{
+                    this.snackbarLogin = false
+                    setTimeout(() =>{
+                        this.loadingBtns.next = false
+                        this.snackbarLogin = true
+                    },1000)
                 }
             }
-            if(this.$store.state.logged == false){
-                this.snackbarLogin = true
-            }else{
-                this.snackbarLogin = false
-            } 
-                    
+              
         },
 
         createAnAccount(){
-            this.registerLoading = true
+            this.loadingBtns.register = true
             setTimeout(() =>{
-                this.registerLoading = false
+                this.showPassWord = false
+                this.loadingBtns.register = false
                 this.register = true
             }, 1000)
         },
@@ -249,62 +235,39 @@ export default {
             for (let key in data){
                 const account =  data[key]
                 account.id = key
-                this.$store.state.usersAccounts.push(account)
-            }
+                this.$store.dispatch('addAllUsersAccounts', account)
+                }
             })
             .catch(error => console.log(error))
         },
 
         backToLogin(){
-            this.backLoading = true
+            this.loadingBtns.back = true
             setTimeout(() =>{
-                this.backLoading = false
+                this.showPassWord = false
+                this.$refs.formAccount.reset()
+                this.loadingBtns.back = false
                 this.register = false
-                this.newAccount = Object.assign({}, this.defaultData) 
-                this.login = Object.assign({}, this.defaultData)
-               
+                this.newAccount = Object.assign({}, this.defaultData)
+                this.confirmPassword = '' 
             }, 1000) 
              
         },
 
-        saveAccount(){
-            this.filledFieldsValidation()
-            this.passwordValidation()
-            if(this.passwordOK == true && this.fieldsOk == true){    
-                axios.post('https://games-house-c6003.firebaseio.com/accounts.json', this.newAccount)
-                .then(res => console.log(res))
-                .catch(error => console.log(error))
-                this.saveLoading = true
-                setTimeout(()=>{
-                    this.saveLoading = false
-                    this.register = false
-                    this.newAccount = Object.assign({}, this.defaultData)
-                    this.$refs.formAccount.reset()
-                    this.confirmPassword = ''
-                    this.getCreatedAccounts()
-                }, 1500)
-            }    
+        saveAccount(){ 
+            axios.post('https://games-house-c6003.firebaseio.com/accounts.json', this.newAccount)
+            .then(res => console.log(res))
+            .catch(error => console.log(error))
+            this.loadingBtns.save = true
+            setTimeout(()=>{
+                this.loadingBtns.save = false
+                this.register = false
+                this.newAccount = Object.assign({}, this.defaultData)
+                this.$refs.formAccount.reset()
+                this.confirmPassword = ''
+                this.getCreatedAccounts()
+            }, 1500)
         },
-
-        passwordValidation(){
-            if(this.newAccount.password != this.confirmPassword){
-                this.snackbarPassValid = true
-                this.passwordOK = false
-            }else{
-                this.passwordOK = true
-            }
-        },
-
-        filledFieldsValidation(){
-            if(this.newAccount.user == '' || this.newAccount.email == '' || this.newAccount.birth == '' 
-            || this.newAccount.password == '' || this.confirmPassword == ''){
-                this.fieldsOk = false
-                this.snackbarFields = true
-            }else{
-                this.snackbarFields = false
-                this.fieldsOk = true
-            }
-        }
     }
 }
 
@@ -312,34 +275,4 @@ export default {
 
 <style>
 
-    .fade-enter {
-        opacity: 0;
-    }
-
-    .fade-enter-active {
-        transition: opacity 1s;
-    }
-
-    .fade-leave-active {
-        transition: opacity 1s;
-        opacity: 0;
-    }
-
-    @keyframes slide-in {
-        from {
-        transform: translateY(20px);
-        }
-        to {
-        transform: translateY(0);
-        }
-    }
-
-    @keyframes slide-out {
-      from {
-        transform: translateY(0);
-      }
-      to{
-        transform: translateY(20px);
-      }
-    }
 </style>
