@@ -73,8 +73,8 @@ export default {
        logOut(title){
             if(title == 'LogOut'){
                 setTimeout(() =>{
-                    this.$store.state.userLogged = Object.assign({}, this.defaultData)
-                    this.$store.state.logged = false
+                    this.$store.dispatch('resetUserLogged', this.defaultData)  
+                    this.$store.commit('resetStatusLogged', false) 
                     this.$router.push({path: '/login|register'})
                 }, 1000)
             } 
@@ -84,7 +84,5 @@ export default {
 </script>
 
 <style>
-    /* #logOut{
-        background-image: url('../paginasCategorias/images/control.jpg')
-    }  */
+   
 </style>
