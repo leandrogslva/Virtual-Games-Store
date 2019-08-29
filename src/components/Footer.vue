@@ -35,7 +35,6 @@ export default {
              icons: [
                 'fab fa-facebook',
                 'fab fa-twitter',
-                'fab fa-google-plus',
                 'fab fa-linkedin',
                 'fab fa-instagram'
             ]
@@ -48,8 +47,6 @@ export default {
                 window.location.assign('http://www.facebook.com')
             }else if(icon == 'fab fa-twitter'){
                 window.location.assign('http://www.twitter.com')
-            }else if(icon == 'fab fa-google-plus'){
-                window.location.assign('http://www.plus.google.com')
             }else if(icon == 'fab fa-linkedin'){
                 window.location.assign('http://www.linkedin.com')
             }else if(icon == 'fab fa-instagram'){
