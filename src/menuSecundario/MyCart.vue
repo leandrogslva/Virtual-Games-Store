@@ -1,7 +1,7 @@
 <template>
     <div id="cartAndFavorites">
         <v-content>
-            <v-container>
+            <v-container v-if="myCart != ''">
                 <v-layout row wrap>
                     <v-flex xs2 
                     v-for="cart in myCart"
@@ -39,22 +39,21 @@
                         </v-snackbar>       
                     </v-flex>
                 </v-layout>
-            </v-container>
-            
-            <v-container v-if="myCart != ''">
-                <v-layout row wrap>
+
+                <v-layout row wrap class="mt-5">
                     <v-flex xs10>
                         <btns-component 
                         @openDescription="showDescription = $event"
                         ></btns-component>    
                     </v-flex>
                     <v-flex xs2>
-                        <v-btn class="blue darken-3">
+                        <v-btn class="blue darken-3" @click="buyAll(myCart)">
                             <v-icon left>mdi-shopping</v-icon>
                             Purchase All</v-btn>
                     </v-flex>
                 </v-layout>
             </v-container>
+            
             <v-container v-else>
                 <v-card>
                     <v-card-title 
@@ -94,6 +93,10 @@ export default {
         }
     },
 
+    created(){
+       this.loadData()
+    },
+    
     components:{
         'btns-component': DownButtons
     },
@@ -122,12 +125,14 @@ export default {
                     this.myCart.push(game)
                 }
             }).catch(error => console.log(error))
-        }
+        },
+
+        buyAll(myCart){
+            this.$router.push({path: '/compra'})
+        },
     },
 
-    created(){
-       this.loadData()
-    },
+    
 }
 </script>
 
