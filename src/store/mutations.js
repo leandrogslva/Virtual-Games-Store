@@ -17,3 +17,11 @@ export const setStatusLogged = (state, payload) => {
 export const resetStatusLogged = (state, payload) => {
     state.logged = payload
 }
+
+export const listGamesToPurchase = (state , payload) => {
+    state.gamesToPurchase.push(payload)
+}
+
+export const cleanGamesToPurchase = (state) => {
+    state.gamesToPurchase = []
+}

@@ -14,6 +14,7 @@ export const store = new Vuex.Store({
         },
         logged: false,
         usersAccounts:[],
+        gamesToPurchase: [],
     },
     getters,
     actions,
