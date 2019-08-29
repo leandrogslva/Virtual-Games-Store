@@ -6,6 +6,7 @@ import MaisVendidos from './paginasCategorias/MaisVendidos.vue'
 import Luta from './paginasCategorias/Luta.vue'
 import Login from './menuSecundario/login.vue'
 import MyCart from './menuSecundario/MyCart.vue'
+import Compra from './components/Compra.vue'
 
 export const routes = [
     { path: '/', name: 'MaisVendidos', component: MaisVendidos},
@@ -16,4 +17,5 @@ export const routes = [
     { path: '/aventura', name: 'Aventura', component: Aventura},
     { path: '/login|register', name: 'Login', component: Login},
     { path: '/cart', name: 'Cart', component: MyCart},
+    { path: '/compra', name: 'Compra', component: Compra},
 ]
