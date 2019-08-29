@@ -5,3 +5,7 @@ export const allUsers =  state => {
 export const gamesToPurchase = state => {
     return state.gamesToPurchase
 }
+
+export const userLogged = state => {
+    return state.userLogged
+}
