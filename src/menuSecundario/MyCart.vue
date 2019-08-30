@@ -137,13 +137,13 @@ export default {
             for(let i = 0; i < this.myCart.length; i++){
                 this.$store.dispatch('listGamesToPurchase', myCart[i])
             }
-            this.$router.push({path: '/prepayment'})
+            this.$router.push({path: '/payment'})
         },
 
         buy(game){
             this.$store.dispatch('cleanGamesToPurchase')
             this.$store.dispatch('listGamesToPurchase', game)
-            this.$router.push({path: '/prepayment'}) 
+            this.$router.push({path: '/payment'}) 
         }
     }, 
 }
