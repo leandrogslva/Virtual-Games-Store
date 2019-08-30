@@ -11,7 +11,7 @@
                         
                         <img :src="cart.link" id="organizeGames"/>
                         
-                        <v-btn small class="blue darken-3" style="margin-left: 30px">Buy</v-btn>
+                        <v-btn small class="blue darken-3" style="margin-left: 30px" @click="buy(cart)">Buy</v-btn>
 
                         <v-tooltip bottom
                         color="red">
@@ -133,12 +133,19 @@ export default {
         },
 
         buyAll(myCart){
-            this.$store.dispatch('listGamesToPurchase', myCart)
-            this.$router.push({path: '/compra'})
+            this.$store.dispatch('cleanGamesToPurchase')
+            for(let i = 0; i < this.myCart.length; i++){
+                this.$store.dispatch('listGamesToPurchase', myCart[i])
+            }
+            this.$router.push({path: '/prepayment'})
         },
-    },
 
-    
+        buy(game){
+            this.$store.dispatch('cleanGamesToPurchase')
+            this.$store.dispatch('listGamesToPurchase', game)
+            this.$router.push({path: '/prepayment'}) 
+        }
+    }, 
 }
 </script>
 

@@ -10,7 +10,7 @@
                         <p id="organizeText">{{games.titulo}} <br>for only <br><b>R$ {{games.preco}}</b></p>
                         <img :src="games.link" id="organizeGames"/>
                         
-                        <v-btn small class="blue darken-3">Buy</v-btn>
+                        <v-btn small class="blue darken-3" @click="buy(games)">Buy</v-btn>
                 
                         <v-tooltip bottom
                         color="black">
@@ -73,6 +73,11 @@ export default {
             .then(res => console.log(res))
             .catch(error => console.log(error))
         },
+        buy(game){
+            this.$store.dispatch('cleanGamesToPurchase')
+            this.$store.dispatch('listGamesToPurchase', game)
+            this.$router.push({path: '/compra'}) 
+        }
     },
 
 }

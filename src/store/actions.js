@@ -14,6 +14,6 @@ export const listGamesToPurchase = ({ commit }, payload) => {
     commit('listGamesToPurchase', payload)
 }
 
-export const cleanGamesToPurchase = ({ commit }, payload) => {
-    commit('cleanGamesToPurchase', payload)
+export const cleanGamesToPurchase = ({ commit }) => {
+    commit('cleanGamesToPurchase')
 }
