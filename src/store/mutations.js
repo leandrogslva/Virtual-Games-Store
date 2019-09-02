@@ -25,3 +25,7 @@ export const listGamesToPurchase = (state , payload) => {
 export const cleanGamesToPurchase = (state) => {
     state.gamesToPurchase = []
 }
+
+export const removeGameFromPurchaseList = (state, payload) => {
+    state.gamesToPurchase.splice(payload,1)
+}

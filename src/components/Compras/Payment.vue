@@ -4,9 +4,19 @@
             <v-container>
                 <v-layout row wrap>
                     <v-flex xs8>
-                        <v-layout v-for="games in toPurchase" :key='games.id' mt-2>
-                            <img :src="games.link" id="organizeGamesToBuy">
-                            <p style="margin-top: 50px; text-align: center"> {{games.descricao}} <br><br> R$: {{games.preco}}</p> 
+                        <v-layout v-for="games in toPurchase" :key='games.id' row wrap>
+                            <v-flex xs2 mt-2>
+                                <img :src="games.link" id="organizeGamesToBuy">
+                            </v-flex>
+
+                            <v-flex xs8 class="text-center" mt-5>
+                                <p> {{games.descricao}} </p>
+                                <v-btn
+                                    class="red darken-3"
+                                    @click="removeGame(games)">remove game
+                                </v-btn>
+                                <p>R$: {{games.preco}}</p>
+                            </v-flex>
                         </v-layout>
                     </v-flex>
                     
@@ -81,18 +91,21 @@ export default {
     },
 
     methods: {
-        resolveTotalValue(){
+        calcTotalValue(){
+            this.total = 0.00
             for(let i = 0; i < this.toPurchase.length; i++){
                 this.total = this.total + this.toPurchase[i].preco
             }
         },
-        finishPayment(selected){
-            
+
+        removeGame(game){
+            this.$store.dispatch('removeGameFromPurchaseList', game)
+            this.calcTotalValue()
         }
     },   
 
     created(){
-        this.resolveTotalValue()
+        this.calcTotalValue()
     }
 }
 </script>
