@@ -16,6 +16,7 @@
                         <v-tooltip bottom
                         color="red">
                             <v-icon 
+                            style="margin-right: 35px"
                             color="green"
                             class="darken-3"
                             slot="activator"

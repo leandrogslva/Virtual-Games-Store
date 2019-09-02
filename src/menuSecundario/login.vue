@@ -13,7 +13,7 @@
                         <v-text-field
                         v-model="login.user"
                         light
-                        label="User"
+                        label="Username:"
                         placeholder="Enter your user">
                         </v-text-field>  
 
@@ -21,7 +21,7 @@
                         v-model="login.password"
                         light
                         style="width: 300px"
-                        label="Password"
+                        label="Password:"
                         placeholder="Enter your password"
                         :append-icon="showPassWord? 'visibility' : 'visibility_off'"
                         @click:append="showPassWord = !showPassWord"
