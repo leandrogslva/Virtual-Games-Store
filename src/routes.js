@@ -7,6 +7,7 @@ import Luta from './paginasCategorias/Luta.vue'
 import Login from './menuSecundario/login.vue'
 import MyCart from './menuSecundario/MyCart.vue'
 import Payment from './components/Compras/Payment.vue'
+import Manual from './menuSecundario/manual.vue'
 
 export const routes = [
     { path: '/', name: 'MaisVendidos', component: MaisVendidos},
@@ -17,5 +18,6 @@ export const routes = [
     { path: '/aventura', name: 'Aventura', component: Aventura},
     { path: '/login|register', name: 'Login', component: Login},
     { path: '/cart', name: 'Cart', component: MyCart},
+    { path: '/manual', name: 'Manual', component: Manual},
     { path: '/payment', name: 'Payment', component: Payment},
 ]

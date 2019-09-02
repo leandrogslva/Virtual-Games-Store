@@ -94,7 +94,6 @@ export default {
         color:white;
         text-align:center;
     }
-
     #organizeText{
         padding-right: 17px;
     }

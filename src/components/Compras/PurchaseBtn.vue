@@ -6,7 +6,7 @@
         :disabled="!formOK"
         color="red darken-3"
         style="color:white"
-        @click="finishPurchase(paymentData)">Finalizar Compra</v-btn>
+        @click="finishPurchase(paymentData)">Finish Purchase</v-btn>
     </div>    
 </template>
 <script>
