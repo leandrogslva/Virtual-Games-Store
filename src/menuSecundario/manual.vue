@@ -1,7 +1,7 @@
 <template>
     <div id="manual">
         <v-content>
-            <h1>Instruction Manual</h1>
+            <h2>Instruction Manual</h2>
             <ol>
                 <li>Create a registre and join us</li>
                 <li>See some games we have and click on "BUY" or add how many games you want to your cart and buy it all at once </li>
