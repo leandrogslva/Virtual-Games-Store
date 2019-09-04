@@ -233,7 +233,7 @@ export default {
         },
 
         getCreatedAccounts(){
-            axios.get('https://virtual-games-store.firebaseio.com/accounts.json')
+            axios.get('https://games-house-c6003.firebaseio.com/accounts.json')
             .then(res => {
             console.log(res)
             const data = res.data
@@ -260,7 +260,7 @@ export default {
         },
 
         saveAccount(){ 
-            axios.post('https://virtual-games-store.firebaseio.com/accounts.json', this.newAccount)
+            axios.post('https://games-house-c6003.firebaseio.com/accounts.json', this.newAccount)
             .then(res => console.log(res))
             .catch(error => console.log(error))
             this.loadingBtns.save = true

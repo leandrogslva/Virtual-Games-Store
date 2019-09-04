@@ -75,7 +75,7 @@ export default {
      methods:{
         addOrRemoveOnCar(games){
             this.carGameTitle = games.titulo
-            axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id +'/cart.json', games)
+            axios.post('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id +'/cart.json', games)
             .then(res => console.log(res))
             .catch(error => console.log(error))
         },

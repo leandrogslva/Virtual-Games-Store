@@ -64,7 +64,7 @@ export default {
                 })
             }
            if(this.paymentType == 'credit/debit'){   
-                axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', dadosDaCompra)
+                axios.post('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', dadosDaCompra)
                 .then(response => {
                     console.log(response)
                     this.snackbarPurchase = true
@@ -78,7 +78,7 @@ export default {
                 })
             }else if(this.paymentType == 'virtual'){
                 if(this.userData.virtualPoints > 10){
-                     axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', dadosDaCompra)
+                     axios.post('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', dadosDaCompra)
                     .then(response => {
                         console.log(response)
                         this.snackbarPurchase = true
@@ -96,7 +96,7 @@ export default {
                 }
                 
             }else if(this.paymentType == 'bankSlip'){
-                 axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', dadosDaCompra)
+                 axios.post('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', dadosDaCompra)
                 .then(response => {
                     console.log(response)
                     this.snackbarPurchase = true
