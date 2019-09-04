@@ -8,6 +8,7 @@ import Login from './menuSecundario/login.vue'
 import MyCart from './menuSecundario/MyCart.vue'
 import Payment from './components/Compras/Payment.vue'
 import Manual from './menuSecundario/manual.vue'
+import MyGames from './menuSecundario/myGames.vue'
 
 export const routes = [
     { path: '/', name: 'MaisVendidos', component: MaisVendidos},
@@ -20,4 +21,5 @@ export const routes = [
     { path: '/cart', name: 'Cart', component: MyCart},
     { path: '/manual', name: 'Manual', component: Manual},
     { path: '/payment', name: 'Payment', component: Payment},
+    { path: '/myGames', name: 'MyGames', component: MyGames},
 ]

@@ -103,7 +103,7 @@ export default {
     },
 
     computed:{
-        userLogged(){
+        userData(){
             return this.$store.getters.userLogged
         }
     },
@@ -111,7 +111,7 @@ export default {
     methods: {
         removeFromCart(cart){
             this.cartGameTitle = cart.titulo
-            axios.delete('https://games-house-c6003.firebaseio.com/accounts/' + this.userLogged.id + '/cart/' + cart.id + '.json')
+            axios.delete('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id + '/cart/' + cart.id + '.json')
             .then(res => {
                 let index = this.myCart.indexOf(cart)
                 this.myCart.splice(index,1) 
@@ -121,7 +121,7 @@ export default {
         },
 
         loadMyCart(){
-            axios.get('https://games-house-c6003.firebaseio.com/accounts/' + this.userLogged.id + '/cart.json')
+            axios.get('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id + '/cart.json')
             .then(res => {
                 console.log(res)
                 let data = res.data

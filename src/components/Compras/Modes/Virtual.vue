@@ -4,14 +4,17 @@
             <v-card light>
                 <v-card-title style="color: white" class="red darken-3; title">Confirm your data</v-card-title>
                 <v-card-text>
+
                     <v-text-field
                     label="Username:"
                     v-model="paymentData.name"
                     :rules="[rules.required]"></v-text-field>
+
                     <v-text-field
                     label="E-mail:"
                     v-model="paymentData.email"
                     :rules="[rules.required,rules.email]"></v-text-field>
+
                     <v-text-field
                     label="Password:"
                     v-model="paymentData.password"
@@ -19,7 +22,7 @@
                     type="password"></v-text-field>
                     
                     <purchase-btn-component 
-                    style="margin-left: 130px" 
+                    style="margin-left: 115px" 
                     :paymentData="paymentData" 
                     :formOK="formOK"
                     :paymentType="paymentType"></purchase-btn-component>

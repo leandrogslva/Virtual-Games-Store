@@ -1,5 +1,5 @@
 <template>
-    <div id="manual">
+    <div id="defaultHeight">
         <v-content>
             <h2>Instruction Manual</h2>
             <ol>
@@ -14,7 +14,7 @@
             <ul>
                 <li>Credit/Debit Card - Will be send an e-mail with your data and the game details</li>
                 <li>Bank Slip - You will receive an e-mail with your data and a pdf attached to download</li>
-                <li>Virtual Points - Virtual poinst you receive buying games. Every one dollar, one Virtual Point. You can trade later for other games </li>
+                <li>Virtual Points - You receive Virtual Poinst buying games. Every one real, one Virtual Point where you may trade later for other games. Ten Virtual Points equals one real </li>
             </ul>
         </v-content>
     </div>    
@@ -25,7 +25,7 @@ export default {
 }
 </script>
 <style>
-    #manual{
+    #defaultHeight{
         min-height: 530px
     }
     li {

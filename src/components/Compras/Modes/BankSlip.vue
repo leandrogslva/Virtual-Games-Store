@@ -15,8 +15,9 @@
                     v-mask="cpfMask"
                     v-model="paymentData.cpf"
                     :rules="[rules.required,rules.cpf]"></v-text-field>
+                    
                     <purchase-btn-component 
-                    style="margin-left: 130px" 
+                    style="margin-left: 115px" 
                     :formOK="formOK" 
                     :paymentData="paymentData"
                     :paymentType="paymentType"></purchase-btn-component>

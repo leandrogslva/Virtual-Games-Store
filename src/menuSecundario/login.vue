@@ -168,13 +168,14 @@ export default {
                 email: '',
                 birth: '',
                 password: '',
+                virtualPoints: 0,
             },
             newAccount:{
                 user: '',
                 email: '',
                 birth: '',
                 password: '',
-                cart: [],
+                virtualPoints: 0,
             },
             defaultLogin: {
                 user: '',
@@ -202,9 +203,14 @@ export default {
                 if(this.login.user == this.allUsers[i].user && 
                 this.login.password == this.allUsers[i].password){
                     this.$store.commit('setStatusLogged', true)
+                    let userLogged = {
+                        id: this.allUsers[i].id,
+                        user:this.login.user,
+                        virtualPoints:this.allUsers[i].virtualPoints,
+                    }
                     setTimeout(() => {
-                        this.$router.push({path:'/'})
-                        this.$store.dispatch('addUserLogged', this.login)
+                        this.$router.push({path:'/'})   
+                        this.$store.dispatch('addUserLogged', userLogged)
                         this.loadingBtns.next = false
                     }, 1000) 
                 }else{
@@ -214,8 +220,7 @@ export default {
                         this.snackbarLogin = true
                     },1000)
                 }
-            }
-              
+            }   
         },
 
         createAnAccount(){

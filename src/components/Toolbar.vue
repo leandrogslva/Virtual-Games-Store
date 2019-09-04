@@ -54,7 +54,8 @@ export default {
         return{
             categoriesMenu: false,
             menuList:[
-                {title:'My cart', link:'/cart'},
+                {title:'My Cart', link:'/cart'},
+                {title:'My Games', link:'/myGames'},
                 {title:'Purchase Manual', link:'/manual' },
                 {title:'LogOut'},
             ],

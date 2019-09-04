@@ -55,6 +55,12 @@ export default {
     components: {
         'btns-component': DownBtns,
     },
+
+    computed: {
+        userData(){
+            return this.$store.getters.userLogged
+        }
+    },
     
     data(){
         return{
@@ -69,14 +75,15 @@ export default {
      methods:{
         addOrRemoveOnCar(games){
             this.carGameTitle = games.titulo
-            axios.post('https://games-house-c6003.firebaseio.com/accounts/' + this.$store.state.userLogged.id +'/cart.json', games)
+            axios.post('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id +'/cart.json', games)
             .then(res => console.log(res))
             .catch(error => console.log(error))
         },
+        
         buy(game){
             this.$store.dispatch('cleanGamesToPurchase')
             this.$store.dispatch('listGamesToPurchase', game)
-            this.$router.push({path: '/compra'}) 
+            this.$router.push({path: '/payment'}) 
         }
     },
 

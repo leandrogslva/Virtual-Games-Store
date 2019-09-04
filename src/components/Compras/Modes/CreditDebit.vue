@@ -35,7 +35,7 @@
                     label="CVV:"></v-text-field>
 
                     <purchase-btn-component 
-                    style="margin-left: 130px" 
+                    style="margin-left: 115px" 
                     :paymentData="paymentData" 
                     :formOK="formOK"
                     :paymentType="paymentType"></purchase-btn-component>

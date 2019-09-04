@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
         userLogged: {
             id: '',
             user: '',
+            virtualPoints: 0,
         },
         logged: false,
         usersAccounts:[],
