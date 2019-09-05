@@ -54,12 +54,12 @@ export default {
                 {titulo: 'Call Of Duty WWII',
                 link:'https://paladins.it/wp-content/uploads/2017/04/call-of-duty-leak-diretta-gamesoul-1280x720.jpg',
                 descricao:' Jogo Battlefield',
-                preco: 119.90},
+                preco: 119.89},
 
                 {titulo: 'Killing Floor',
                 link:'https://wallpapercave.com/wp/wp2130913.jpg',
                 descricao:' Jogo Killing',
-                preco: 69.90},
+                preco: 69.99},
 
                 {titulo: 'Call Of Duty Black Ops III ',
                 link:'https://images2.alphacoders.com/597/thumb-1920-597965.jpg',
@@ -69,7 +69,7 @@ export default {
                 {titulo: "Rainbow Six Siege",
                 link:'https://images7.alphacoders.com/521/thumb-1920-521305.png',
                 descricao:' Jogo Rainbow',
-                preco: 89.90},   
+                preco: 89.97},   
             ]
         }
     },

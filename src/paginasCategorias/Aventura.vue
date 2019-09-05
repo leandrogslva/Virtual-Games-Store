@@ -59,7 +59,7 @@ export default {
                 {titulo: 'Rise Of The Tom Raider',
                 link:'http://7wallpapers.net/wp-content/uploads/7_Rise-of-the-Tomb-Raider.jpg',
                 descricao:' Jogo Tomb',
-                preco: 49.90},
+                preco: 49.94},
 
                 {titulo: 'Uncharted 4',
                 link:'https://wallpapersite.com/images/wallpapers/nathan-drake-3410x1918-uncharted-4-a-thiefs-end-ps4-851.jpg',
@@ -69,7 +69,7 @@ export default {
                 {titulo: 'The Witcher 3',
                 link:'https://i0.wp.com/mentalmars.com/wp-content/uploads/2015/05/The_Witcher_3_Wallpaper_-_Preview.jpg?fit=800%2C450&ssl=1',
                 descricao:' Jogo Witcher',
-                preco: 99.00},
+                preco: 99.89},
             ]
         }
     },

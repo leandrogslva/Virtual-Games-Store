@@ -205,8 +205,11 @@ export default {
                     this.$store.commit('setStatusLogged', true)
                     let userLogged = {
                         id: this.allUsers[i].id,
-                        user:this.login.user,
-                        virtualPoints:this.allUsers[i].virtualPoints,
+                        user: this.allUsers[i].user,
+                        virtualPoints: this.allUsers[i].virtualPoints,
+                        email: this.allUsers[i].email,
+                        birth: this.allUsers[i].birth,
+                        password: this.allUsers[i].password
                     }
                     setTimeout(() => {
                         this.$router.push({path:'/'})   

@@ -29,3 +29,7 @@ export const cleanGamesToPurchase = (state) => {
 export const removeGameFromPurchaseList = (state, payload) => {
     state.gamesToPurchase.splice(payload,1)
 }
+
+export const updateVirtualPoints = (state, payload) => {
+    state.userLogged.virtualPoints = payload
+}

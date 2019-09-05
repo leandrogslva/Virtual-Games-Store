@@ -8,11 +8,7 @@ Vue.use (Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        userLogged: {
-            id: '',
-            user: '',
-            virtualPoints: 0,
-        },
+        userLogged: { },
         logged: false,
         usersAccounts:[],
         gamesToPurchase: [],

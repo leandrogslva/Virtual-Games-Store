@@ -7,7 +7,7 @@
                     v-for="games in allGames"
                     :key="games.titulo">
 
-                        <p id="organizeText">{{games.titulo}} <br>for only <br><b>R$ {{games.preco}}</b></p>
+                        <p id="organizeText">{{games.titulo}} <br>for only <br><b>R$ {{games.preco}} or <br> 150 Virtual Points</b></p>
                         <img :src="games.link" id="organizeGames"/>
                         
                         <v-btn small class="blue darken-3" @click="buy(games)">Buy</v-btn>

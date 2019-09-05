@@ -42,7 +42,7 @@ export default {
                 {titulo:"The Evil Within 2", 
                 link:"https://http2.mlstatic.com/poster-do-game-the-evil-within-2-2017-D_NQ_NP_707584-MLB25952602197_092017-F.jpg", 
                 descricao:"Jogo The Evil",
-                preco: 159.90},
+                preco: 159.99},
                 
                 {titulo:"GTFO",
                 link:"https://steamcdn-a.akamaihd.net/steam/apps/493520/header.jpg?t=1561667153",

@@ -74,8 +74,9 @@ export default {
                 this.myGames = response.data 
             })
             .catch(erro => console.log(erro))
-        }
+        },
     },
+
     created(){
         this.getMyGames()
     }
