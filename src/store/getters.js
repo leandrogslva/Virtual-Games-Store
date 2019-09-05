@@ -9,3 +9,7 @@ export const gamesToPurchase = state => {
 export const userLogged = state => {
     return state.userLogged
 }
+
+export const logged = state => {
+    return state.logged
+}
