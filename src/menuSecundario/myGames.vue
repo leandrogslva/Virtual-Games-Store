@@ -68,7 +68,7 @@ export default {
     
     methods: {
         getMyGames(){
-            axios.get('https://games-house-c6003.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json')
+            axios.get('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json')
             .then(response => {
                 console.log(response)
                 this.myGames = response.data 

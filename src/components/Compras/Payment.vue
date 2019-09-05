@@ -99,7 +99,8 @@ export default {
         },
 
         removeGame(game){
-            this.$store.dispatch('removeGameFromPurchaseList', game)
+            let indexGame = this.toPurchase.indexOf(game)
+            this.$store.dispatch('removeGameFromPurchaseList', indexGame)
             this.calcTotalValue()
         }
     },   

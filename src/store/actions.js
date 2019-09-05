@@ -18,6 +18,6 @@ export const cleanGamesToPurchase = ({ commit }) => {
     commit('cleanGamesToPurchase')
 }
 
-export const removeGameFromPurchaseList = ({commit}) => {
-    commit('removeGameFromPurchaseList')
+export const removeGameFromPurchaseList = ({commit}, payload) => {
+    commit('removeGameFromPurchaseList', payload)
 }
