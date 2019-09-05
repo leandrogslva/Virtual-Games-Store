@@ -13,10 +13,16 @@
 
                 <v-spacer></v-spacer>
 
+                <v-chip 
+                class="red darken-3" 
+                v-if="this.loggedStatus == true"
+                disabled>Virtual Poinst: {{this.userData.virtualPoints}}
+                </v-chip>
+
                 <v-btn 
                 flat
-                :disabled="this.$store.state.logged"      
-                @click="goToLogin()">{{this.$store.state.userLogged.user || 'Login / Register'}}
+                :disabled="this.loggedStatus"      
+                @click="goToLogin()">{{this.userData.user || 'Login / Register'}}
                 </v-btn>
 
                 <v-menu
@@ -66,7 +72,16 @@ export default {
         }
     },
 
-     methods:{
+    computed:{
+        userData(){
+            return this.$store.getters.userLogged
+        },
+        loggedStatus(){
+            return this.$store.getters.logged
+        }
+    },
+
+    methods:{
        goToLogin(){
            this.$router.push({path: '/login|register'})
        },
