@@ -20,7 +20,7 @@
                     </v-btn>
                     </v-card-title>
                     <v-card-actions class="black darken-3 justify-center">
-                    &copy;2019 — <strong>Games House</strong>
+                    &copy;2019 — <strong>Virtual Games Store</strong>
                     </v-card-actions>
                 </v-card>
             </v-footer>
@@ -43,15 +43,8 @@ export default {
 
     methods:{
         goToOurSocialNetworks(icon){
-            if(icon == 'fab fa-facebook'){
-                window.location.assign('http://www.facebook.com')
-            }else if(icon == 'fab fa-twitter'){
-                window.location.assign('http://www.twitter.com')
-            }else if(icon == 'fab fa-linkedin'){
-                window.location.assign('http://www.linkedin.com')
-            }else if(icon == 'fab fa-instagram'){
-                window.location.assign('http://www.instagram.com')
-            }
+            let formatedNameIcon = icon.split('-')
+            window.location.assign('http://www.' + formatedNameIcon[1] + '.com')
         }
     }
 }

@@ -7,7 +7,7 @@
         app
         clipped-left>
             <v-toolbar-side-icon @click="$emit('abreMenu', categoriesMenu = !categoriesMenu)"></v-toolbar-side-icon>
-                <v-toolbar-title>Games Page
+                <v-toolbar-title>Virtual Games Store
                     <v-icon>mdi-gamepad-variant</v-icon>
                 </v-toolbar-title>
 

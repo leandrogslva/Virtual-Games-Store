@@ -38,7 +38,7 @@ export default {
                 {title: 'FPS', link:'/fps'},
                 {title: 'Horror', link:'/Terror'},
                 {title: 'RPG', link:'/rpg'},
-                {title: 'Mais Vendidos', link:'/'},
+                {title: 'Best Sellers', link:'/'},
             ] 
         }
     }
