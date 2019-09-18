@@ -20,7 +20,7 @@
                     </v-btn>
                     </v-card-title>
                     <v-card-actions class="black darken-3 justify-center">
-                    &copy;2019 — <strong>Virtual Games Store</strong>
+                    &copy;2019 — <strong> Leandro Gilberto Silva | leandrogslva@gmail.com | WhatsApp: 97636-6281</strong>
                     </v-card-actions>
                 </v-card>
             </v-footer>
