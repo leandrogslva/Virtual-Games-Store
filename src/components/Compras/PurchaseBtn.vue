@@ -25,13 +25,15 @@
             The entered data doesn't match with your user. Please check your data and try again
         </v-snackbar>
 
-        <v-snackbar 
-        top 
-        v-model="snackbarPurchase"
+        <v-snackbar
+        v-model="successPurchase"
+        top
         color="success"
-        :timeout="2000">
-            Successful Purchase. An e-mail was sended to your with the purchase data 
+        :timeout="1500">
+            Successful purchase. A email was send to you about the purchase information
         </v-snackbar>
+
+        <p>{{ successPurchase }}</p>
     </div>    
 </template>
 <script>
@@ -45,7 +47,7 @@ export default {
     data(){
         return{
             snackbarErrorPurchase: false,
-            snackbarPurchase: false,
+            successPurchase: false,
             snackbarErrorUserData: false,
             loadingBtn: false,
             convertedVirtualPoinst: 0,
@@ -66,7 +68,7 @@ export default {
 
     methods:{
 
-        finishPurchase(){
+        finishPurchase(){   
             this.convertCashToVirtualPoinst()
             this.calcValueOfGamesInVirtualPoints()
             this.formatPurchaseData()
@@ -91,35 +93,37 @@ export default {
             }
         },
 
-        otherPaymentTypes(){
-            axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', this.dadosDaCompra)
-                .then(response => {
-                    this.snackbarPurchase = true
-                    this.loadingBtn = false
-                    this.removeFromCart()
-                    this.addVirtualPoinst()
-                    this.$router.push({path:'/myGames'})
-                })
-                .catch(erro => {
-                    console.log(erro)
-                    this.loadingBtn = false    
+        async otherPaymentTypes(){
+            await axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', this.dadosDaCompra)
+                .then(
+                    this.successPurchase = true,
+                    setTimeout(() =>{
+                        this.loadingBtn = false,
+                        this.removeFromCart(),
+                        this.addVirtualPoinst()
+                        this.$router.push({path:'/myGames'})
+                    }, 1500)
+                    ).catch(erro => {
+                        console.log(erro)
+                        this.loadingBtn = false    
                 }) 
         },
 
-        virtualPointsPayment(){
+        async virtualPointsPayment(){
             if(this.userData.virtualPoints > this.totalInVirtualPoints){
                 if(this.paymentData.name == this.userData.user && 
                 this.paymentData.email == this.userData.email &&
                 this.paymentData.password == this.userData.password){
-                    axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', this.dadosDaCompra)
-                    .then(response => {
-                        this.snackbarPurchase = true
-                        this.loadingBtn = false
-                        this.removeFromCart()
-                        this.subtractVirtualPoints() 
-                        this.$router.push({path:'/myGames'})
-                    })
-                    .catch(erro => {
+                    await axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', this.dadosDaCompra)
+                    .then(
+                        this.successPurchase = true,
+                        setTimeout(() =>{
+                            this.loadingBtn = false,
+                            this.removeFromCart(),
+                            this.subtractVirtualPoints()
+                            this.$router.push({path:'/myGames'})
+                        }, 1500)
+                    ).catch(erro => {
                         console.log(erro)
                         this.loadingBtn = false    
                     })
@@ -150,18 +154,18 @@ export default {
             axios.patch("https://virtual-games-store.firebaseio.com/accounts/" + this.userData.id + ".json", 
             {   
                 virtualPoints: this.convertedVirtualPoinst + this.userData.virtualPoints
-            }).then(response => {
+            }).then(response => (
                 this.$store.dispatch('updateVirtualPoints', response.data.virtualPoints)
-            }).catch(erro => console.log(erro))
+            )).catch(erro => console.log(erro))
         },
 
         subtractVirtualPoints(){
              axios.patch("https://virtual-games-store.firebaseio.com/accounts/" + this.userData.id + ".json", 
             {   
                 virtualPoints: this.userData.virtualPoints - this.totalInVirtualPoints
-            }).then(response => {
+            }).then(response => (
                 this.$store.dispatch('updateVirtualPoints', response.data.virtualPoints)
-            }).catch(erro => console.log(erro))
+            )).catch(erro => console.log(erro))
         },
 
         removeFromCart(){
