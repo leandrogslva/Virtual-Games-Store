@@ -130,6 +130,14 @@
                     </v-card>
                 </v-form>
             </v-container>
+
+            <v-snackbar 
+            v-model="successCreating" 
+            color="success"
+            :timeout="2000"
+            top>
+                Your account was successfuly created
+            </v-snackbar>
         </v-content>
     </div>
 </template>
@@ -153,6 +161,7 @@ export default {
     data(){
         return{
             formularioPreenchido: false,    
+            successCreating: false,
             snackbarLogin: false,
             showPassWord: false,
             register: false,
@@ -163,23 +172,12 @@ export default {
                 back: false,
                 next: false,
             },
-            defaultData:{
-                user: '',
-                email: '',
-                birth: '',
-                password: '',
-                virtualPoints: 0,
-            },
             newAccount:{
                 user: '',
                 email: '',
                 birth: '',
                 password: '',
                 virtualPoints: 0,
-            },
-            defaultLogin: {
-                user: '',
-                password: '',
             },
             login: {
                 user: '',
@@ -238,7 +236,6 @@ export default {
         getCreatedAccounts(){
             axios.get('https://virtual-games-store.firebaseio.com/accounts.json')
             .then(res => {
-            console.log(res)
             const data = res.data
             for (let key in data){
                 const account =  data[key]
@@ -256,25 +253,23 @@ export default {
                 this.$refs.formAccount.reset()
                 this.loadingBtns.back = false
                 this.register = false
-                this.newAccount = Object.assign({}, this.defaultData)
                 this.confirmPassword = '' 
             }, 1000) 
              
         },
 
-        saveAccount(){ 
-            axios.post('https://virtual-games-store.firebaseio.com/accounts.json', this.newAccount)
-            .then(res => console.log(res))
+        async saveAccount(){ 
+            await axios.post('https://virtual-games-store.firebaseio.com/accounts.json', this.newAccount)
+            .then(  this.loadingBtns.save = true,
+                    this.successCreating = true,
+                setTimeout(()=>{
+                    this.loadingBtns.save = false
+                    this.register = false
+                    this.$refs.formAccount.reset()
+                    this.confirmPassword = ''
+                    this.getCreatedAccounts()
+                }, 1500))
             .catch(error => console.log(error))
-            this.loadingBtns.save = true
-            setTimeout(()=>{
-                this.loadingBtns.save = false
-                this.register = false
-                this.newAccount = Object.assign({}, this.defaultData)
-                this.$refs.formAccount.reset()
-                this.confirmPassword = ''
-                this.getCreatedAccounts()
-            }, 1500)
         },
     }
 }
