@@ -197,29 +197,35 @@ export default {
     methods:{
         next(){
             this.loadingBtns.next = true
-            for(let i = 0; i < this.allUsers.length; i++){
-                if(this.login.user == this.allUsers[i].user && 
-                this.login.password == this.allUsers[i].password){
-                    this.$store.commit('setStatusLogged', true)
-                    let userLogged = {
-                        id: this.allUsers[i].id,
-                        user: this.allUsers[i].user,
-                        virtualPoints: this.allUsers[i].virtualPoints,
-                        email: this.allUsers[i].email,
-                        birth: this.allUsers[i].birth,
-                        password: this.allUsers[i].password
-                    }
-                    setTimeout(() => {
-                        this.$router.push({path:'/'})   
-                        this.$store.dispatch('addUserLogged', userLogged)
-                        this.loadingBtns.next = false
-                    }, 1000) 
-                }else{
-                    this.snackbarLogin = false
+            if(this.allUsers == ''){
+                this.snackbarLogin = true
                     setTimeout(() =>{
                         this.loadingBtns.next = false
-                        this.snackbarLogin = true
                     },1000)
+            }else{  
+                for(let i = 0; i < this.allUsers.length; i++){
+                    if(this.login.user == this.allUsers[i].user && 
+                    this.login.password == this.allUsers[i].password){
+                        this.$store.commit('setStatusLogged', true)
+                        let userLogged = {
+                            id: this.allUsers[i].id,
+                            user: this.allUsers[i].user,
+                            virtualPoints: this.allUsers[i].virtualPoints,
+                            email: this.allUsers[i].email,
+                            birth: this.allUsers[i].birth,
+                            password: this.allUsers[i].password
+                        }
+                        setTimeout(() => {
+                            this.$router.push({path:'/'})   
+                            this.$store.dispatch('addUserLogged', userLogged)
+                            this.loadingBtns.next = false
+                        }, 1000) 
+                    }else{ 
+                        this.snackbarLogin = true
+                        setTimeout(() => {
+                            this.loadingBtns.next = false
+                        }, 1000)            
+                    }
                 }
             }   
         },
@@ -255,7 +261,6 @@ export default {
                 this.register = false
                 this.confirmPassword = '' 
             }, 1000) 
-             
         },
 
         async saveAccount(){ 
