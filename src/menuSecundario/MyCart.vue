@@ -114,8 +114,7 @@ export default {
             axios.delete('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/cart/' + cart.id + '.json')
             .then(res => {
                 let index = this.myCart.indexOf(cart)
-                this.myCart.splice(index,1) 
-                console.log(res)})
+                this.myCart.splice(index,1) })
             .catch(error => console.log(error))
             this.snackbarCar = false
         },
@@ -123,7 +122,6 @@ export default {
         loadMyCart(){
             axios.get('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/cart.json')
             .then(res => {
-                console.log(res)
                 let data = res.data
                 for(let key in data){
                     let game = data[key]

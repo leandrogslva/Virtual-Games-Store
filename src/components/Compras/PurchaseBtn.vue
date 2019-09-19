@@ -94,7 +94,6 @@ export default {
         otherPaymentTypes(){
             axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', this.dadosDaCompra)
                 .then(response => {
-                    console.log(response)
                     this.snackbarPurchase = true
                     this.loadingBtn = false
                     this.removeFromCart()
@@ -114,7 +113,6 @@ export default {
                 this.paymentData.password == this.userData.password){
                     axios.post('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json', this.dadosDaCompra)
                     .then(response => {
-                        console.log(response)
                         this.snackbarPurchase = true
                         this.loadingBtn = false
                         this.removeFromCart()
@@ -153,7 +151,6 @@ export default {
             {   
                 virtualPoints: this.convertedVirtualPoinst + this.userData.virtualPoints
             }).then(response => {
-                console.log(response)
                 this.$store.dispatch('updateVirtualPoints', response.data.virtualPoints)
             }).catch(erro => console.log(erro))
         },
@@ -163,7 +160,6 @@ export default {
             {   
                 virtualPoints: this.userData.virtualPoints - this.totalInVirtualPoints
             }).then(response => {
-                console.log(response)
                 this.$store.dispatch('updateVirtualPoints', response.data.virtualPoints)
             }).catch(erro => console.log(erro))
         },
@@ -171,7 +167,6 @@ export default {
         removeFromCart(){
             for(let i = 0; i < this.gamesToPurchase.length; i++){
                 axios.delete('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/cart/' + this.gamesToPurchase[i].id + '.json')
-            .then(res => console.log(res))
             .catch(error => console.log(error))
             }
         },

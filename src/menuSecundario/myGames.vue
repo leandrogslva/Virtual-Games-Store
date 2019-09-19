@@ -70,7 +70,6 @@ export default {
         getMyGames(){
             axios.get('https://virtual-games-store.firebaseio.com/accounts/' + this.userData.id + '/myShopping.json')
             .then(response => {
-                console.log(response)
                 this.myGames = response.data 
             })
             .catch(erro => console.log(erro))
